@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 
 # What the client sends
 class UserCreate(BaseModel):
@@ -10,14 +10,13 @@ class UserCreate(BaseModel):
     
 # What the server sends back (we avoid sending a password hash)
 class UserOut(BaseModel):
+    model_config = ConfigDict(from_attributes = True) # lets this read directly from a SQLAlchemy object
     id:int
     username: str
     email: str
     degree: str
     gender: str
-    
-    class Config:
-        from_attributes = True # lets this read directly from a SQLAlchemy object
+
         
         
 class LoginRequest(BaseModel):
