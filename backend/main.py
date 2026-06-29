@@ -1,6 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from backend.database import Base, engine
 from backend.routers import users
+from backend.dependencies import get_current_user
+from backend.models import User
 
 Base.metadata.create_all(bind = engine)
 
@@ -11,3 +13,7 @@ app.include_router(users.router)
 def read_root():
     return {"message": "Welcome to Momentum!"}
 
+# temporary test route
+@app.get("/whoami")
+def whoami(current_user: User = Depends(get_current_user)):
+    return {"username": current_user.username, "email": current_user.email}

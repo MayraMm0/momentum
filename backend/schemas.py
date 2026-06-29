@@ -19,3 +19,11 @@ class UserOut(BaseModel):
     class Config:
         from_attributes = True # lets this read directly from a SQLAlchemy object
         
+        
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+    
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
