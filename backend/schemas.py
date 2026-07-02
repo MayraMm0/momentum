@@ -68,6 +68,7 @@ class ExtracurricularCreate(BaseModel):
     active_from: Optional[date] = None
     active_until: Optional[date] = None
 
+# Sends back extracurricular data
 class ExtracurricularOut(BaseModel):
     model_config = ConfigDict(from_attributes = True)
     
@@ -81,3 +82,30 @@ class ExtracurricularOut(BaseModel):
     active_from: Optional[date] = None
     active_until: Optional[date] = None
     is_active: bool
+    
+# Creating a meeting
+class MeetingCreate(BaseModel):
+    title: str
+    with_whom: Optional[str] = None
+    days: Optional[str] = None
+    time_start: Optional[time] = None
+    time_end: Optional[time] = None
+    location: Optional[str] = None
+    recurrence_type: str = "one_time"
+    active_from: Optional[date] = None
+    active_until: Optional[date] = None
+    
+class MeetingOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    
+    id: int
+    user_id: int
+    title: str
+    with_whom: Optional[str] = None
+    days: Optional[str] = None
+    time_start: Optional[time] = None
+    time_end: Optional[time] = None
+    location: Optional[str] = None
+    recurrence_type: str = "one_time"
+    active_from: Optional[date] = None
+    active_until: Optional[date] = None
