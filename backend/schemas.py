@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr, ConfigDict
-from datetime import time
+from datetime import time, date
 from typing import Optional
 
 # What the client sends
@@ -56,4 +56,28 @@ class CourseOut(BaseModel):
     semester: Optional[str] = None
     difficulty_rank: int
     color_hex: str
+    is_active: bool
+    
+# Creating an extracurricular activity
+class ExtracurricularCreate(BaseModel):
+    name: str
+    days: Optional[str] = None
+    time_start: Optional[time] = None
+    time_end: Optional[time] = None
+    location: Optional[str] = None
+    active_from: Optional[date] = None
+    active_until: Optional[date] = None
+
+class ExtracurricularOut(BaseModel):
+    model_config = ConfigDict(from_attributes = True)
+    
+    id: int
+    user_id: int
+    name: str
+    days: Optional[str] = None
+    time_start: Optional[time] = None
+    time_end: Optional[time] = None
+    location: Optional[str] = None
+    active_from: Optional[date] = None
+    active_until: Optional[date] = None
     is_active: bool

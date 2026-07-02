@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from backend.database import Base, engine
-from backend.routers import users, courses
+from backend.routers import users, courses, extracurriculars
 from backend.dependencies import get_current_user
 from backend.models import User
 
@@ -9,6 +9,8 @@ Base.metadata.create_all(bind = engine)
 app = FastAPI(title = "Momentum API")
 app.include_router(users.router)
 app.include_router(courses.router)
+app.include_router(extracurriculars.router)
+
 
 @app.get("/")
 def read_root():
