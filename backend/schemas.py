@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr, ConfigDict
-from datetime import time, date
-from typing import Optional
+from datetime import time, date as date_type
+from typing import Optional, List
 
 # What the client sends
 class UserCreate(BaseModel):
@@ -43,7 +43,7 @@ class CourseCreate(BaseModel):
     
 # Sends back course data
 class CourseOut(BaseModel):
-    model_config = ConfigDict(from_attribute = True)
+    model_config = ConfigDict(from_attributes = True)
     
     id: int
     user_id: int
@@ -65,8 +65,8 @@ class ExtracurricularCreate(BaseModel):
     time_start: Optional[time] = None
     time_end: Optional[time] = None
     location: Optional[str] = None
-    active_from: Optional[date] = None
-    active_until: Optional[date] = None
+    active_from: Optional[date_type] = None
+    active_until: Optional[date_type] = None
 
 # Sends back extracurricular data
 class ExtracurricularOut(BaseModel):
@@ -79,8 +79,8 @@ class ExtracurricularOut(BaseModel):
     time_start: Optional[time] = None
     time_end: Optional[time] = None
     location: Optional[str] = None
-    active_from: Optional[date] = None
-    active_until: Optional[date] = None
+    active_from: Optional[date_type] = None
+    active_until: Optional[date_type] = None
     is_active: bool
     
 # Creating a meeting
@@ -92,9 +92,9 @@ class MeetingCreate(BaseModel):
     time_end: Optional[time] = None
     location: Optional[str] = None
     recurrence_type: str = "one_time"
-    active_from: Optional[date] = None
-    active_until: Optional[date] = None
-    
+    active_from: Optional[date_type] = None
+    active_until: Optional[date_type] = None
+
 class MeetingOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     
@@ -107,5 +107,12 @@ class MeetingOut(BaseModel):
     time_end: Optional[time] = None
     location: Optional[str] = None
     recurrence_type: str = "one_time"
-    active_from: Optional[date] = None
-    active_until: Optional[date] = None
+    active_from: Optional[date_type] = None
+    active_until: Optional[date_type] = None
+    
+# Every event for Today (response)
+class TodayResponse(BaseModel):
+    date: date_type
+    courses: List[CourseOut] = []
+    extracurriculars: List[ExtracurricularOut] = []
+    meetings: List[MeetingOut] = []

@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from backend.database import Base, engine
-from backend.routers import users, courses, extracurriculars, meetings
+from backend.routers import users, courses, extracurriculars, meetings, today
 from backend.dependencies import get_current_user
 from backend.models import User
 
@@ -11,6 +11,7 @@ app.include_router(users.router)
 app.include_router(courses.router)
 app.include_router(extracurriculars.router)
 app.include_router(meetings.router)
+app.include_router(today.router)
 
 
 @app.get("/")
