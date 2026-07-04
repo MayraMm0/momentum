@@ -4,8 +4,7 @@ import enum
 class TaskType(str, enum.Enum):
     ACADEMIC = "academic"
     PERSONAL =  "personal"
-    URGENT = "urgent"
-    RECURRING = "recurring"
+    HEALTH = "health"
     SOCIAL = "social"
     
     

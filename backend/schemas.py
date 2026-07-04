@@ -116,3 +116,25 @@ class TodayResponse(BaseModel):
     courses: List[CourseOut] = []
     extracurriculars: List[ExtracurricularOut] = []
     meetings: List[MeetingOut] = []
+
+# Creating a Project
+class ProjectCreate(BaseModel):
+    title: str
+    description: Optional[str] = None
+    course_id: Optional[int] = None
+    deadline: Optional[date_type] = None
+    priority: int = 0
+    
+# Sends back project data
+class ProjectOut(BaseModel):
+    model_config = ConfigDict(from_attributes = True)
+    
+    id: int
+    user_id: int
+    course_id: Optional[int] = None
+    title: str
+    description: Optional[str] = None
+    deadline: Optional[date_type] = None
+    status: str
+    priority: int
+    
