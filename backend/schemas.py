@@ -201,3 +201,18 @@ class TaskOut(BaseModel):
 # Task + NLP Prediction
 class TaskWithPredictionOut(TaskOut):
         nlp_prediction: Optional[NlpPredictionOut] = None
+        
+# One day calendar grid info (courses/extracurriculars/meetings only — no tasks)
+class DaySchedule(BaseModel):
+    date: date_type
+    courses: List[CourseOut] = []
+    extracurriculars: List[ExtracurricularOut] = []
+    meetings: List[MeetingOut] = []
+    
+# Full week view
+class WeekResponse(BaseModel):
+    week_start: date_type # Sunday
+    week_end: date_type   # Saturday}
+    days: List[DaySchedule] = []
+    tasks: List[TaskOut] = []
+    
