@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from backend.database import Base, engine
-from backend.routers import users, courses, extracurriculars, meetings, today, projects
+from backend.routers import users, courses, extracurriculars, meetings, today, projects, tasks
 from backend.dependencies import get_current_user
 from backend.models import User
 
@@ -13,6 +13,7 @@ app.include_router(extracurriculars.router)
 app.include_router(meetings.router)
 app.include_router(today.router)
 app.include_router(projects.router)
+app.include_router(tasks.router)
 
 @app.get("/")
 def read_root():

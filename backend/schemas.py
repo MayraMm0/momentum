@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr, ConfigDict
-from datetime import time, date as date_type
+from datetime import datetime, time, date as date_type
 from typing import Optional, List
 
 # What the client sends
@@ -138,3 +138,66 @@ class ProjectOut(BaseModel):
     status: str
     priority: int
     
+# NLP Prediction (only nested inside another response, never alone)
+class NlpPredictionOut(BaseModel):
+    model_config = ConfigDict(from_attributes= True)
+    
+    predicted_type: str
+    predicted_subtype: Optional[str] = None
+    confidence_score: Optional[float] = None
+    user_overrode_type: bool
+    user_overrode_subtype: bool
+    model_version: Optional[str] = None
+    
+# Creating a task
+class TaskCreate(BaseModel):
+    title: str
+    description: Optional[str] = None
+    project_id: Optional[int] = None
+    course_id: Optional[int] = None
+    type: Optional[str] = None      # client can override classifier, kept it as str so the router is the single place that decides what "valid type" means
+    subtype: Optional[str] = None   # client can override classifier
+    date_start: Optional[datetime] = None
+    date_finish: Optional[datetime] = None
+    has_deadline: bool = True
+    estimated_hours: Optional[float] = None
+    location: Optional[str] = None
+
+# Updating a task
+class TaskUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    project_id: Optional[int] = None
+    course_id: Optional[int] = None
+    type: Optional[str] = None
+    subtype: Optional[str] = None
+    date_start: Optional[datetime] = None
+    date_finish: Optional[datetime] = None
+    has_deadline: Optional[bool] = None
+    estimated_hours: Optional[float] = None
+    location: Optional[str] = None
+
+    
+# Plain task output
+class TaskOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    
+    id: int
+    user_id: int
+    project_id: Optional[int] = None
+    course_id: Optional[int] = None
+    title: str
+    description: Optional[str] = None
+    type: str
+    subtype: Optional[str] = None
+    date_start: Optional[datetime] = None
+    date_finish: Optional[datetime] = None
+    has_deadline: bool
+    estimated_hours: Optional[float] = None
+    completed: bool
+    priority_score: Optional[int] = None
+    location: Optional[str] = None
+
+# Task + NLP Prediction
+class TaskWithPredictionOut(TaskOut):
+        nlp_prediction: Optional[NlpPredictionOut] = None
