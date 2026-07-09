@@ -20,6 +20,7 @@ def test_add_course_returns_course_with_correct_fields(client, auth_headers):
     assert response.status_code == 200
     data = response.json()
     assert data["name"] == "Thermodynamics"
+    assert data["canonical_name"] == "thermodynamics"
     assert data["professor"] == "Dr. Smith"
     assert data["difficulty_rank"] == 3
     assert data["is_active"] is True
@@ -51,6 +52,7 @@ def test_update_course_changes_only_specified_fields(client, auth_headers):
     assert update_response.status_code == 200
     data = update_response.json()
     assert data["name"] == "Applied Thermodynamics"
+    assert data["canonical_name"] == "thermodynamics"
     assert data["professor"] == "Dr. Smith"
     assert data["difficulty_rank"] == 2
 

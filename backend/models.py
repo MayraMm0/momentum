@@ -46,6 +46,7 @@ class Course(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     name = Column(String, nullable=False)
+    canonical_name = Column(String, nullable=True)  # matched to daily_class_quotes at creation
     professor = Column(String, nullable=True)
     room = Column(String, nullable=True)
     days = Column(String, nullable=True)  # e.g. "MWF"

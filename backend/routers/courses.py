@@ -4,6 +4,7 @@ from typing import List
 
 from backend.database import get_db
 from backend.dependencies import get_current_user
+from backend.canonical import match_canonical_name
 from backend.models import User, Course
 from backend.schemas import CourseCreate, CourseOut
 
@@ -20,6 +21,7 @@ def add_course(
 ):
     new_course = Course(
         user_id = current_user.id,
+        canonical_name = match_canonical_name(course.name),
         # model_dump() converts a data model instance into a standard Python dictionary
         # "**" unpacks as keyword args directly into Course(...), without writing each field manually
         **course.model_dump()

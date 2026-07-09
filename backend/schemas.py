@@ -48,6 +48,7 @@ class CourseOut(BaseModel):
     id: int
     user_id: int
     name: str
+    canonical_name: Optional[str] = None
     professor: Optional[str] = None
     room: Optional[str] = None
     days: Optional[str] = None
