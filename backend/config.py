@@ -9,11 +9,14 @@ class Settings:
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRATION_MINUTES: int = 30
     DATABASE_URL: str = os.getenv("DATABASE_URL")
+    OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY")
 
     def __init__(self):
         if not self.JWT_SECRET:
             raise ValueError("JWT_SECRET is not set in .env")
         if not self.DATABASE_URL:
             raise ValueError("DATABASE_URL is not set in .env")
+        if not self.OPENAI_API_KEY:
+            raise ValueError("OPENAI_API_KEY is not set in .env")
 
 settings = Settings()

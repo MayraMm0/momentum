@@ -217,3 +217,5 @@ class WeekResponse(BaseModel):
     days: List[DaySchedule] = []
     tasks: List[TaskOut] = []
     
+class MotivationOut(BaseModel):
+    quote: str
