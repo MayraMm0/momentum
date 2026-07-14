@@ -7,7 +7,7 @@ from backend.database import get_db
 from backend.dependencies import get_current_user
 from backend.models import User, Course, Extracurricular, Meeting, Task
 from backend.schemas import WeekResponse, DaySchedule
-from backend.routers.today import DAY_CODES
+from backend.constants import DAY_CODES
 
 router = APIRouter(tags=["schedule"])
 

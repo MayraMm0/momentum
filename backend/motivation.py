@@ -11,7 +11,7 @@ from sqlalchemy import desc, or_, and_
 
 from backend.config import settings
 from backend.models import MotivationLog, User, Course, Task
-from backend.routers.today import DAY_CODES
+from backend.constants import DAY_CODES
 from backend.quotes.gender_degree import gender_degree_quotes
 from backend.quotes.daily_classes import daily_class_quotes
 

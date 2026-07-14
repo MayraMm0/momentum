@@ -3,22 +3,13 @@ from sqlalchemy.orm import Session
 from sqlalchemy import or_
 from datetime import datetime, date
 
+from backend.constants import DAY_CODES
 from backend.database import get_db
 from backend.dependencies import get_current_user
 from backend.models import User, Course, Extracurricular, Meeting
 from backend.schemas import TodayResponse
 
 router = APIRouter(tags=["today"])
-
-DAY_CODES = {
-    0: "M",
-    1: "T",
-    2: "W",
-    3: "R",
-    4: "F",
-    5: "S",
-    6: "U",
-}
 
 @router.get("/today", response_model=TodayResponse)
 def get_today(
